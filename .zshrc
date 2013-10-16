@@ -147,6 +147,9 @@ fi
 ############################################################
 # gitのブランチ情報を右プロンプトに表示
 ############################################################
+# ${fg[...]} や $reset_color をロード
+autoload -U colors; colors
+
 function rprompt-git-current-branch {
         local name st color
 
@@ -170,10 +173,10 @@ function rprompt-git-current-branch {
 
         # %{...%} は囲まれた文字列がエスケープシーケンスであることを明示する
         # これをしないと右プロンプトの位置がずれる
-        echo "%{$color%}$name%{$reset_color%} "
+        echo "%{$color%}$name%{$reset_color%}"
 }
 
 # プロンプトが表示されるたびにプロンプト文字列を評価、置換する
 setopt prompt_subst
 
-RPROMPT='[`rprompt-git-current-branch`%~]'
+RPROMPT='[`rprompt-git-current-branch`]'
