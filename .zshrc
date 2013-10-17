@@ -129,7 +129,7 @@ ip=`~/.zsh.d/os.sh`
 # というか丸パク(ry
 
 PROMPT="
-[%n@%m($ip)] %{${fg[yellow]}%}%~%{${reset_color}%}
+[%n@%m($ip) %* ] %{${fg[yellow]}%}%~%{${reset_color}%}
 %(?.%{$fg[green]%}.%{$fg[blue]%})%(?!(*'-') <!(*;-;%)? <)%{${reset_color}%} "
 # プロンプト指定(コマンドの続き)
 PROMPT2='[%n]> '
@@ -143,6 +143,9 @@ if [ ${UID} -eq 0 ]; then
   tmp_rprompt="%B%U${tmp_rprompt}%u%b"
   tmp_sprompt="%B%U${tmp_sprompt}%u%b"
 fi
+
+TRAPALRM () { zle reset-prompt}
+TMOUT=1 
 
 ############################################################
 # gitのブランチ情報を右プロンプトに表示
