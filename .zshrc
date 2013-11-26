@@ -93,6 +93,7 @@ alias lg='la | grep'
 alias md='mkdir'
 alias rd='rmdir'
 alias jobs='jobs -l'
+alias ec='emacsclient'
  
 export PATH=~/bin:$PATH
 export EDITOR='s -w'''
