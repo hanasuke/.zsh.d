@@ -15,7 +15,7 @@ setopt no_beep            # ビープ音なし
 # history
 ############################################################################################
 
-HISTFILE=~/.zsh_history
+HISTFILE=~/.zsh.d/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 # 重複したコマンドラインはヒストリに追加しない
