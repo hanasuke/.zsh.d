@@ -4,8 +4,8 @@
 
 if [ `uname` = "Darwin" ] 
 then
-    ~/.zsh.d/ipaddr_m.sh
+    ./ipaddr_m.sh
 elif [ `uname` = "Linux" ]
  then
-    ~/.zsh.d/ipaddr_l.sh
+    ./ipaddr_l.sh
 fi
