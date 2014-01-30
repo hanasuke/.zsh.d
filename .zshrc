@@ -15,7 +15,7 @@ setopt no_beep            # ビープ音なし
 # history
 ############################################################################################
 
-HISTFILE=./.zsh_history
+HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 # 重複したコマンドラインはヒストリに追加しない
@@ -119,7 +119,7 @@ autoload -U colors; colors
 
 setopt correct
 
-ip=`./os.sh`
+ip=`os.sh`
 
 # プロンプト設定
 # http://qiita.com/kubosho_/items/c200680c26e509a4f41c参照
