@@ -119,7 +119,7 @@ autoload -U colors; colors
 
 setopt correct
 
-ip=`os.sh`
+ip=`~/.zsh.d/os.sh`
 
 # プロンプト設定
 # http://qiita.com/kubosho_/items/c200680c26e509a4f41c参照
