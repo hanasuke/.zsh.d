@@ -141,8 +141,8 @@ if [ ${UID} -eq 0 ]; then
   tmp_sprompt="%B%U${tmp_sprompt}%u%b"
 fi
 
-TRAPALRM () { zle reset-prompt}
-TMOUT=60 
+#TRAPALRM () { zle reset-prompt}
+#TMOUT=60 
 
 ######################################################################################################
 # gitのブランチ情報を右プロンプトに表示
