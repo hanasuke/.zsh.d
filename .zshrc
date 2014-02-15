@@ -126,7 +126,7 @@ ip=`~/.zsh.d/os.sh`
 # というか丸パク(ry
 
 PROMPT="
-[%n@%m($ip) %D %T ] %{${fg[yellow]}%}%~%{${reset_color}%}
+[%n@%m($ip)] %{${fg[yellow]}%}%~%{${reset_color}%}
 %(?.%{$fg[green]%}.%{$fg[blue]%})%(?!(*'-') <!(*;-;%)? <)%{${reset_color}%} "
 # プロンプト指定(コマンドの続き)
 PROMPT2='[%n]> '
