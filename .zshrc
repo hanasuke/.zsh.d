@@ -94,7 +94,8 @@ alias md='mkdir'
 alias rd='rmdir'
 alias jobs='jobs -l'
 alias ec='emacsclient'
- 
+alias tmux='tmux -2'
+
 export PATH=~/bin:$PATH
 export EDITOR='s -w'''
 
@@ -142,7 +143,7 @@ if [ ${UID} -eq 0 ]; then
 fi
 
 #TRAPALRM () { zle reset-prompt}
-#TMOUT=60 
+#TMOUT=60
 
 ######################################################################################################
 # gitのブランチ情報を右プロンプトに表示
