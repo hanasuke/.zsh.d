@@ -85,7 +85,7 @@ setopt nolistbeep
 # alias
 ############################################################################################
 
-alias ls='ls -G'
+alias ls='ls -FG'
 alias ks='echo "hello ks"'
 alias ll='ls -l'
 alias la='ls -la'
