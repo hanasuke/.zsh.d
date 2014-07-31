@@ -95,6 +95,7 @@ alias rd='rmdir'
 alias jobs='jobs -l'
 alias ec='emacsclient'
 alias tmux='tmux -2'
+alias emacs='emacs -nw'
 
 export PATH=~/bin:$PATH
 export EDITOR='s -w'''
