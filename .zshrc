@@ -98,7 +98,6 @@ alias tmux='tmux -2'
 alias emacs='emacs -nw'
 
 export PATH=~/bin:$PATH
-export EDITOR='s -w'''
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
