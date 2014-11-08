@@ -6,6 +6,8 @@ export LANG=ja_JP.UTF-8
 export XMODIFIRES=@im=uim
 export GTK_IM_MODULE=uim
 export LSCOLORS=gxfxcxdxbxegedabagacad
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 
 bindkey -e                # キーバインドをEmacsモード
 setopt no_beep            # ビープ音なし
