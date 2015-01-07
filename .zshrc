@@ -98,6 +98,7 @@ alias jobs='jobs -l'
 alias ec='emacsclient'
 alias tmux='tmux -2'
 alias emacs='emacs -nw'
+alias ta='tmux a'
 
 export PATH=~/bin:$PATH
 
