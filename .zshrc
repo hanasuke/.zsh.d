@@ -87,7 +87,14 @@ setopt nolistbeep
 # alias
 ############################################################################################
 
-alias ls='ls -FG'
+if [ `uname` = "Darwin" ]
+then
+    alias ls='ls -FG'
+elif [ `uname` = "Linux" ]
+then
+    alias ls='ls -F --color'
+fi
+
 alias ks='echo "hello ks"'
 alias ll='ls -l'
 alias la='ls -la'
