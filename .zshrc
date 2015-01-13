@@ -175,4 +175,12 @@ function _update_vcs_info_msg() {
         [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
 }
 add-zsh-hook precmd _update_vcs_info_msg
-RPROMPT="%1(v|%F{green}%1v%f|)" # [%20<..<%~]"
+RPROMPT="%1(v|%F{green}%1v%f|)" # [%20<..<%~]""
+
+######################################################################################################
+# gitのブランチ情報を右プロンプトに表示
+######################################################################################################
+
+if [ -f ~/.zsh.d/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+    source ~/.zsh.d/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
