@@ -214,3 +214,11 @@ RPROMPT="%1(v|%F{green}%1v%f|)" # [%20<..<%~]""
 if [ -f ~/.zsh.d/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
     source ~/.zsh.d/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
+
+######################################################################################################
+# gitignore.io API
+######################################################################################################
+
+function gi() {
+    curl -L -s https://www.gitignore.io/api/$@ ;
+}
