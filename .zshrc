@@ -120,7 +120,7 @@ alias tmux='tmux -2'
 alias emacs='emacs -nw'
 alias ta='tmux a'
 
-export PATH=~/bin:$PATH
+export PATH=/usr/local/bin:$PATH:~/bin
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
