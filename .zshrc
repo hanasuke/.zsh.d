@@ -119,6 +119,7 @@ alias ec='emacsclient'
 alias tmux='tmux -2'
 alias emacs='emacs -nw'
 alias ta='tmux a'
+alias tn='tmux new -s'
 
 export PATH=/usr/local/bin:$PATH:~/bin
 
