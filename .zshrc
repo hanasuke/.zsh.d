@@ -114,6 +114,10 @@ alias ta='tmux a'
 alias tn='tmux new -s'
 alias be='bundle exec'
 
+if [ -e /usr/local/bin/colordiff ]; then
+    alias diff='colordiff -u'
+fi
+
 export PATH=/usr/local/bin:$PATH:~/bin
 
 ############################################################################################
