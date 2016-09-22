@@ -114,18 +114,6 @@ alias ta='tmux a'
 alias tn='tmux new -s'
 alias be='bundle exec'
 
-# init rbenv
-if [ -e ~/.rbenv ]; then
-    export PATH=~/.rbenv/bin:$PATH && eval "$(rbenv init -)"
-    alias re='rbenv exec'
-fi
-
-# init nvm
-if [ -e ~/.nvm ]; then
-    export NVM_DIR=~/.nvm
-    source $(brew --prefix nvm)/nvm.sh
-fi
-
 export PATH=/usr/local/bin:$PATH:~/bin
 
 ############################################################################################
@@ -226,3 +214,19 @@ fi
 function gi() {
     curl -L -s https://www.gitignore.io/api/$@ ;
 }
+
+######################################################################################################
+# load external modules
+######################################################################################################
+
+# init rbenv
+if [ -e ~/.rbenv ]; then
+    export PATH=~/.rbenv/bin:$PATH && eval "$(rbenv init -)"
+    alias re='rbenv exec'
+fi
+
+# init nvm
+if [ -e ~/.nvm ]; then
+    export NVM_DIR=~/.nvm
+    source $(brew --prefix nvm)/nvm.sh
+fi
