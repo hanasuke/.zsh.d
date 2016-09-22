@@ -114,9 +114,13 @@ alias ta='tmux a'
 alias tn='tmux new -s'
 alias be='bundle exec'
 
-export PATH=/usr/local/bin:$PATH:~/bin
+# init rbenv
+if [ -e ~/.rbenv ]; then
+    export PATH=~/.rbenv/bin:$PATH && eval "$(rbenv init -)"
+    alias re='rbenv exec'
+fi
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+export PATH=/usr/local/bin:$PATH:~/bin
 
 ############################################################################################
 # Go
