@@ -120,6 +120,12 @@ if [ -e ~/.rbenv ]; then
     alias re='rbenv exec'
 fi
 
+# init nvm
+if [ -e ~/.nvm ]; then
+    export NVM_DIR=~/.nvm
+    source $(brew --prefix nvm)/nvm.sh
+fi
+
 export PATH=/usr/local/bin:$PATH:~/bin
 
 ############################################################################################
