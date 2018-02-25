@@ -128,6 +128,10 @@ if [ -x "`which go`"  ] ; then
     export GOROOT=`go env GOROOT`
     export GOPATH=${HOME}/lib/golang
     export PATH=${GOROOT}/bin:${GOPATH}/bin:${PATH}
+
+    if [ -e $GOPATH/bin/ghq -a -e $GOPATH/bin/peco ]; then
+        alias g='cd $(ghq list -p | peco)'
+    fi
 fi
 
 ############################################################################################
