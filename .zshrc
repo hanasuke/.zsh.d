@@ -124,6 +124,20 @@ export PATH=/usr/local/bin:$PATH:~/bin
 # Go
 ############################################################################################
 
+function peco-history () {
+    local tac
+    if which tac > /dev/null; then
+        tac="tac"
+    else
+        tac="tail -r"
+    fi
+    BUFFER=$(history -n 1 | \
+        eval $tac | \
+        peco --query "$LBUFFER")
+    CURSOR=$#BUFFER
+    zle clear-screen
+}
+
 if [ -x "`which go`"  ] ; then
     export GOROOT=`go env GOROOT`
     export GOPATH=${HOME}/lib/golang
@@ -131,6 +145,8 @@ if [ -x "`which go`"  ] ; then
 
     if [ -e $GOPATH/bin/ghq -a -e $GOPATH/bin/peco ]; then
         alias g='cd $(ghq list -p | peco)'
+        zle -N peco-history
+        bindkey '^r' peco-history
     fi
 fi
 
