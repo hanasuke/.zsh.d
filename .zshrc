@@ -143,7 +143,7 @@ if [ -x "`which go`"  ] ; then
     export GOPATH=${HOME}/lib/golang
     export PATH=${GOROOT}/bin:${GOPATH}/bin:${PATH}
 
-    if [ -e $GOPATH/bin/ghq -a -e $GOPATH/bin/peco ]; then
+    if [ -e $GOPATH/bin/ghq -a -x `which peco` ]; then
         alias g='cd $(ghq list -p | peco)'
         zle -N peco-history
         bindkey '^r' peco-history
@@ -157,6 +157,34 @@ fi
 if [ -e ~/.zsh_local ]; then
     . ~/.zsh_local
 fi
+
+######################################################################################################
+# gitのブランチ情報を右プロンプトに表示
+######################################################################################################
+autoload -Uz add-zsh-hook
+autoload -Uz vcs_info
+
+zstyle ':vcs_info:*' enable git svn hg bzr
+zstyle ':vcs_info:*' formats '[%b]'
+zstyle ':vcs_info:*' actionformats '[%b|%a]'
+zstyle ':vcs_info:(svn|bzr):*' branchformat '%b:r%r'
+zstyle ':vcs_info:bzr:*' use-simple true
+
+autoload -Uz is-at-least
+if is-at-least 4.3.10; then
+        zstyle ':vcs_info:git:*' check-for-changes true
+        zstyle ':vcs_info:git:*' stagedstr "+"
+        zstyle ':vcs_info:git:*' unstagedstr "-"
+        zstyle ':vcs_info:git:*' formats '%b[%c%u]'
+        zstyle ':vcs_info:git:*' actionformats '[%b|%a[%c%u]]'
+fi
+
+function _update_vcs_info_msg() {
+        psvar=()
+        LANG=en_US.UTF-8 vcs_info
+        [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
+}
+add-zsh-hook precmd _update_vcs_info_msg
 
 ############################################################################################
 # プロンプト設定
@@ -176,7 +204,7 @@ ip=`~/.zsh.d/os.sh`
 # というか丸パク(ry
 
 PROMPT="
-[%n@%m($ip)] %{${fg[yellow]}%}%~%{${reset_color}%}
+[%n@%m($ip)] %{${fg[yellow]}%}%~%{${reset_color}%} (%1(v|%F{green}%1v%f|))
 %(?.%{$fg[green]%}.%{$fg[blue]%})%(?!(*'-') <!(*;-;%)? <)%{${reset_color}%} "
 # プロンプト指定(コマンドの続き)
 PROMPT2='[%n]> '
@@ -193,35 +221,6 @@ fi
 
 #TRAPALRM () { zle reset-prompt}
 #TMOUT=60
-
-######################################################################################################
-# gitのブランチ情報を右プロンプトに表示
-######################################################################################################
-autoload -Uz add-zsh-hook
-autoload -Uz vcs_info
-
-zstyle ':vcs_info:*' enable git svn hg bzr
-zstyle ':vcs_info:*' formats '[%b]'
-zstyle ':vcs_info:*' actionformats '[%b|%a]'
-zstyle ':vcs_info:(svn|bzr):*' branchformat '%b:r%r'
-zstyle ':vcs_info:bzr:*' use-simple true
-
-autoload -Uz is-at-least
-if is-at-least 4.3.10; then
-        zstyle ':vcs_info:git:*' check-for-changes true
-        zstyle ':vcs_info:git:*' stagedstr "+"
-        zstyle ':vcs_info:git:*' unstagedstr "-"
-        zstyle ':vcs_info:git:*' formats '[%b[%c%u]]'
-        zstyle ':vcs_info:git:*' actionformats '[%b|%a[%c%u]]'
-fi
-
-function _update_vcs_info_msg() {
-        psvar=()
-        LANG=en_US.UTF-8 vcs_info
-        [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
-}
-add-zsh-hook precmd _update_vcs_info_msg
-RPROMPT="%1(v|%F{green}%1v%f|)" # [%20<..<%~]""
 
 ######################################################################################################
 # gitのブランチ情報を右プロンプトに表示
