@@ -26,7 +26,7 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 # 重複したコマンドラインはヒストリに追加しない
-setopt hist_ignore_dups
+setopt hist_ignore_all_dups
 # 履歴の共有
 setopt share_history
 # ヒストリにhistoryコマンドを記録しない
