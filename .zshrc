@@ -253,3 +253,20 @@ if [ -e ~/.nvm ]; then
     export NVM_DIR=~/.nvm
     source $(brew --prefix nvm)/nvm.sh
 fi
+
+# init asdf
+if [ -e ~/.asdf ]; then
+  . $HOME/.asdf/asdf.sh
+  . $HOME/.asdf/completions/asdf.bash
+fi
+
+# load kubernetes completion
+if [ -x "`which kubectl`"  ] ; then
+    source <(kubectl completion zsh)
+fi
+
+# load minikube completion
+# load kubernetes completion
+if [ -x "`which minikube`"  ] ; then
+    source <(minikube completion zsh)
+fi
