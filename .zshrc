@@ -88,16 +88,26 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 # 補完候補表示時にビープ音を鳴らさない
 setopt nolistbeep
 
+
+# ssh host complement
+function _ssh {
+    if is_linux
+    then
+        compadd `grep -rh '^Host ' ~/.ssh/conf* | grep -v '*' | awk '{print $2}' | sort`
+    else
+        compadd `ggrep -rh '^Host ' ~/.ssh/conf* | ggrep -v '*' | awk '{print $2}' | sort`
+    fi
+}
+
 ############################################################################################
 # alias
 ############################################################################################
 
-if [ `uname` = "Darwin" ]
-then
-    alias ls='ls -FG'
-elif [ `uname` = "Linux" ]
+if is_linux
 then
     alias ls='ls -F --color'
+else
+    alias ls='ls -FG'
 fi
 
 alias ks='echo "hello ks"'
@@ -270,3 +280,17 @@ fi
 if [ -x "`which minikube`"  ] ; then
     source <(minikube completion zsh)
 fi
+
+######################################################################################################
+# utility functions
+######################################################################################################
+
+function is_linux {
+    if [ `uname` = "Darwin" ]
+    then
+        false
+    elif [ `uname` = "Linux" ]
+    then
+        true
+    fi
+}
