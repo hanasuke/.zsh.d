@@ -88,6 +88,19 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 # 補完候補表示時にビープ音を鳴らさない
 setopt nolistbeep
 
+######################################################################################################
+# utility functions
+######################################################################################################
+
+function is_linux {
+    if [ `uname` = "Darwin" ]
+    then
+        false
+    elif [ `uname` = "Linux" ]
+    then
+        true
+    fi
+}
 
 # ssh host complement
 function _ssh {
@@ -280,17 +293,3 @@ fi
 if [ -x "`which minikube`"  ] ; then
     source <(minikube completion zsh)
 fi
-
-######################################################################################################
-# utility functions
-######################################################################################################
-
-function is_linux {
-    if [ `uname` = "Darwin" ]
-    then
-        false
-    elif [ `uname` = "Linux" ]
-    then
-        true
-    fi
-}
