@@ -52,6 +52,12 @@ bindkey "^N" history-beginning-search-forward-end
 # 補完
 ############################################################################################
 
+# init asdf
+if [ -e ~/.asdf ]; then
+  . $HOME/.asdf/asdf.sh
+  fpath=($HOME/.asdf/completions $fpath)
+fi
+
 # 補完
 autoload -U compinit
 compinit
@@ -275,12 +281,6 @@ fi
 if [ -e ~/.nvm ]; then
     export NVM_DIR=~/.nvm
     source $(brew --prefix nvm)/nvm.sh
-fi
-
-# init asdf
-if [ -e ~/.asdf ]; then
-  . $HOME/.asdf/asdf.sh
-  . $HOME/.asdf/completions/asdf.bash
 fi
 
 # load kubernetes completion
