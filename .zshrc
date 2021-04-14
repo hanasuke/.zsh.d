@@ -180,7 +180,7 @@ if [ -x "`which go`"  ] ; then
     export GOPATH=${HOME}/lib/golang
     export PATH=${GOROOT}/bin:${GOPATH}/bin:${PATH}
 
-    if [ -e $GOPATH/bin/ghq -a -x `which peco` ]; then
+    if [ -x `which ghq` -a -x `which peco` ]; then
         alias repo='cd $(ghq list -p | peco)'
         zle -N peco-history
         bindkey '^r' peco-history
