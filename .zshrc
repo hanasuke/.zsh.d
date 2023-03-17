@@ -296,3 +296,7 @@ fi
 if [ -e ~/.zsh_local ]; then
     . ~/.zsh_local
 fi
+
+if ! is_linux; then
+    eval $(/opt/homebrew/bin/brew shellenv)
+fi
