@@ -149,6 +149,10 @@ fi
 
 export PATH=/usr/local/bin:$PATH:~/bin
 
+if ! is_linux; then
+    eval $(/opt/homebrew/bin/brew shellenv)
+fi
+
 ############################################################################################
 # Go
 ############################################################################################
@@ -172,7 +176,7 @@ if [ -x "`which go`"  ] ; then
     export GOPATH=${HOME}/lib/golang
     export PATH=${GOROOT}/bin:${GOPATH}/bin:${PATH}
 
-    if [ -x `which ghq` -a -x `which peco` ]; then
+    if [ -x "`which ghq`" -a -x "`which peco`" ]; then
         alias repo='cd $(ghq list -p | peco)'
         zle -N peco-history
         bindkey '^r' peco-history
@@ -295,8 +299,4 @@ fi
 
 if [ -e ~/.zsh_local ]; then
     . ~/.zsh_local
-fi
-
-if ! is_linux; then
-    eval $(/opt/homebrew/bin/brew shellenv)
 fi
