@@ -59,8 +59,9 @@ if [ -e ~/.asdf ]; then
 fi
 
 # 補完
-autoload -U compinit
+autoload -Uz compinit
 compinit
+autoload -U +X bashcompinit && bashcompinit
 # 予測機能
 # autoload predict-on
 # predict-on
@@ -282,6 +283,8 @@ fi
 # load kubernetes completion
 if [ -x "`which kubectl`"  ] ; then
     source <(kubectl completion zsh)
+    alias kube="kubectl"
+    complete -o default -F __start_kubectl kube
 fi
 
 # load minikube completion
