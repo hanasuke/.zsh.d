@@ -17,6 +17,31 @@ export EDITOR=emacs
 bindkey -e                # キーバインドをEmacsモード
 setopt no_beep            # ビープ音なし
 
+export PATH=/usr/local/bin:$PATH:~/bin
+
+######################################################################################################
+# utility functions
+######################################################################################################
+
+function is_linux {
+    if [ `uname` = "Darwin" ]
+    then
+        false
+    elif [ `uname` = "Linux" ]
+    then
+        true
+    fi
+}
+
+# ssh host complement
+function _ssh {
+    if is_linux
+    then
+        compadd `grep -rh '^Host ' ~/.ssh/conf* | grep -v '*' | awk '{print $2}' | sort`
+    else
+        compadd `ggrep -rh '^Host ' ~/.ssh/conf* | ggrep -v '*' | awk '{print $2}' | sort`
+    fi
+}
 
 ############################################################################################
 # history
@@ -58,6 +83,16 @@ if [ -e ~/.asdf ]; then
   fpath=($HOME/.asdf/completions $fpath)
 fi
 
+# brew completion for mac
+if is_linux; then
+    # noting
+else
+    fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+fi
+
+# 3rd party tool
+fpath=($HOME/.zsh_completion $fpath)
+
 # 補完
 autoload -Uz compinit
 compinit
@@ -94,30 +129,6 @@ setopt auto_cd
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 # 補完候補表示時にビープ音を鳴らさない
 setopt nolistbeep
-
-######################################################################################################
-# utility functions
-######################################################################################################
-
-function is_linux {
-    if [ `uname` = "Darwin" ]
-    then
-        false
-    elif [ `uname` = "Linux" ]
-    then
-        true
-    fi
-}
-
-# ssh host complement
-function _ssh {
-    if is_linux
-    then
-        compadd `grep -rh '^Host ' ~/.ssh/conf* | grep -v '*' | awk '{print $2}' | sort`
-    else
-        compadd `ggrep -rh '^Host ' ~/.ssh/conf* | ggrep -v '*' | awk '{print $2}' | sort`
-    fi
-}
 
 ############################################################################################
 # alias
