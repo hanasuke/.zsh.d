@@ -13,6 +13,7 @@ export LSCOLORS=gxfxcxdxbxegedabagacad
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export EDITOR=emacs
+PROMPT_NEW_LINE=$'\n'
 
 bindkey -e                # キーバインドをEmacsモード
 setopt no_beep            # ビープ音なし
@@ -40,6 +41,16 @@ function _ssh {
         compadd `grep -rh '^Host ' ~/.ssh/conf* | grep -v '*' | awk '{print $2}' | sort`
     else
         compadd `ggrep -rh '^Host ' ~/.ssh/conf* | ggrep -v '*' | awk '{print $2}' | sort`
+    fi
+}
+
+function precmd() {
+    # Print a newline before the prompt, unless it's the
+    # first prompt in the process.
+    if [ -z "$NEW_LINE_BEFORE_PROMPT" ]; then
+        NEW_LINE_BEFORE_PROMPT=1
+    elif [ "$NEW_LINE_BEFORE_PROMPT" -eq 1 ]; then
+        echo ""
     fi
 }
 
@@ -240,8 +251,7 @@ ip=`~/.zsh.d/os.sh`
 # http://qiita.com/kubosho_/items/c200680c26e509a4f41c参照
 # というか丸パク(ry
 
-PROMPT="
-[%n@%m($ip)] %{${fg[yellow]}%}%~%{${reset_color}%} %1(v|%F{green}%1v%f|)
+PROMPT="[%n@%m($ip)] %{${fg[yellow]}%}%~%{${reset_color}%} %1(v|%F{green}%1v%f|)
 %(?.%{$fg[green]%}.%{$fg[blue]%})%(?!(*'-') <!(*;-;%)? <)%{${reset_color}%} "
 # プロンプト指定(コマンドの続き)
 PROMPT2='[%n]> '
@@ -258,14 +268,6 @@ fi
 
 #TRAPALRM () { zle reset-prompt}
 #TMOUT=60
-
-######################################################################################################
-# gitのブランチ情報を右プロンプトに表示
-######################################################################################################
-
-if [ -f ~/.zsh.d/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-    source ~/.zsh.d/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
 
 ######################################################################################################
 # gitignore.io API
@@ -296,6 +298,9 @@ if [ -x "`which kubectl`"  ] ; then
     source <(kubectl completion zsh)
     alias kube="kubectl"
     complete -o default -F __start_kubectl kube
+    local context=$(kubectl config current-context)
+
+    PROMPT="<%{$fg[red]%}${context}%{${reset_color}>${PROMPT_NEW_LINE}${PROMPT}"
 fi
 
 # load minikube completion
