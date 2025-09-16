@@ -20,6 +20,11 @@ setopt no_beep            # ビープ音なし
 
 export PATH=/usr/local/bin:$PATH:~/bin
 
+autoload -Uz select-word-style
+select-word-style normal
+zstyle ':zle:*' word-chars " -_./;:@?"
+zstyle ':zle:*' word-style unspecified
+
 ######################################################################################################
 # utility functions
 ######################################################################################################
